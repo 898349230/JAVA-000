@@ -4,15 +4,19 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.*;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpHead;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import static io.netty.handler.codec.http.HttpResponseStatus.NO_CONTENT;
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
@@ -37,10 +41,20 @@ public class HttpOutboundHandler {
     public void handle(ChannelHandlerContext ctx, FullHttpRequest fullRequest){
         CloseableHttpResponse execute = null;
         final String url = this.backendUrl + fullRequest.uri();
+        HttpHeaders headers = fullRequest.headers();
+        System.out.println(headers);
         System.out.println("url : " + url);
         FullHttpResponse response = null;
         try {
             HttpGet httpGet = new HttpGet(url);
+            List<Map.Entry<String, String>> entries = headers.entries();
+            if(null != entries){
+                for (Map.Entry<String, String> entry : entries) {
+                    if("nio".equals(entry.getKey())){
+                        httpGet.addHeader("nio", entry.getValue());
+                    }
+                }
+            }
             execute = defaultClient.execute(httpGet);
             HttpEntity entity = execute.getEntity();
             System.out.println("statusCode : " + execute.getStatusLine().getStatusCode());

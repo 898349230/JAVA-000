@@ -13,8 +13,9 @@ import io.netty.handler.codec.http.HttpHeaders;
  */
 public class HeaderHttpRequestFilter implements HttpRequestFilter{
     @Override
-    public void filter(FullHttpRequest fullRequest, ChannelHandlerContext ctx) {
-        HttpHeaders entries = fullRequest.trailingHeaders();
-        entries.set("nio","sunxinbo");
+    public void
+    filter(FullHttpRequest fullRequest, ChannelHandlerContext ctx) {
+//      设置 header
+        fullRequest.headers().add("nio", "sunxinbo");
     }
 }
