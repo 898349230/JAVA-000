@@ -1,0 +1,3 @@
+# ×Ô¶¨Òå configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.ab.SchoolAutoConfiguration
