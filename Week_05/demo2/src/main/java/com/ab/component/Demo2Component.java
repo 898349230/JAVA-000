@@ -1,8 +1,6 @@
-package com.ab;
+package com.ab.component;
 
 import org.springframework.stereotype.Component;
-
-import javax.sound.midi.Soundbank;
 
 /**
  * @classname: Demo2Component

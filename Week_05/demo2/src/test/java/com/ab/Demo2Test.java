@@ -1,5 +1,6 @@
 package com.ab;
 
+import com.ab.service.ICacheService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class Demo2Test {
 
     @Autowired
     private School school;
+    @Autowired
+    private ICacheService iCacheService;
 
     /**
      * @description 测试 shcool-spring-boot-starter 是否装配
@@ -29,5 +32,17 @@ public class Demo2Test {
     @Test
     public void test(){
         System.out.println(school);
+    }
+
+    @Test
+    public void testJDBC(){
+
+    }
+
+    @Test
+    public void testCacheAnnotation() throws InterruptedException {
+        System.out.println(iCacheService.getString("第一次 "));
+        Thread.sleep(6000);
+        System.out.println(iCacheService.getString("第二次 "));
     }
 }
