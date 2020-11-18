@@ -10,5 +10,5 @@ ApplicationTest 和 Demo2Test 分别为测试类
 
 1：(挑战) 基于 AOP 和自定义注解，实现 @MyCache(60) 对于指定方法返回值缓存 60 秒
 
-​	CacheServiceInterceptor 类内实现了该功能
+​	demo2 项目中 CacheServiceInterceptor 类内实现了该功能
 
