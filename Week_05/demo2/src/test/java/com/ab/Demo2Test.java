@@ -1,5 +1,6 @@
 package com.ab;
 
+import com.ab.jdbc.DataSourceTest;
 import com.ab.jdbc.JDBCTest;
 import com.ab.service.ICacheService;
 import org.junit.Test;
@@ -7,8 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
-import javax.sql.ConnectionPoolDataSource;
 import java.sql.SQLException;
 
 /**
@@ -19,6 +20,7 @@ import java.sql.SQLException;
  */
 @RunWith(value = SpringRunner.class)
 @SpringBootTest(classes = Demo2Application.class)
+@WebAppConfiguration
 public class Demo2Test {
 
     @Autowired
@@ -27,6 +29,8 @@ public class Demo2Test {
     private ICacheService iCacheService;
     @Autowired
     private JDBCTest jdbcTest;
+    @Autowired
+    private DataSourceTest dataSourceTest;
 
     /**
      * @description 测试 shcool-spring-boot-starter 是否装配
@@ -43,6 +47,11 @@ public class Demo2Test {
     @Test
     public void testJDBC() throws SQLException {
         System.out.println(jdbcTest.insert("insert into person values(6,13)"));
+    }
+
+    @Test
+    public void testDataSource() throws SQLException {
+        System.out.println(dataSourceTest.insert("insert into person values(7,13)"));
     }
 
     @Test
