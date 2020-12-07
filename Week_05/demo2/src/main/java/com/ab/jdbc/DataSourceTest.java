@@ -1,8 +1,13 @@
 package com.ab.jdbc;
 
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * @classname: JDBCTest
@@ -11,10 +16,13 @@ import java.sql.*;
  * @time: 2020/11/18、22:33
  */
 @Component
-public class JDBCTest {
+public class DataSourceTest {
+
+    @Autowired
+    private DataSource dataSource;
 
     public int insert(String sql) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://myaliyun.com:3309/db01", "root", "123456");
+        Connection connection = dataSource.getConnection();
         connection.setAutoCommit(false);
         int i = 0;
         try {
