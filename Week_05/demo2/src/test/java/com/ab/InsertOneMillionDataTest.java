@@ -39,14 +39,13 @@ public class InsertOneMillionDataTest {
     @Test
     public void test() throws SQLException {
         Long insert1 = batchInsertOneMillionDataImpl.insert();
-        Long insert2 = dataSourceBatchInsertOneMillionDataImpl.insert();
-        Long insert3 = dataSourceOne2OneInsertOneMillionDataImpl.insert();
-        Long insert4 = one2OneInsertMillionDataImpl.insert();
         System.out.println("批量： " + insert1);
+        Long insert2 = dataSourceBatchInsertOneMillionDataImpl.insert();
         System.out.println("连接池批量： " + insert2);
+        Long insert3 = dataSourceOne2OneInsertOneMillionDataImpl.insert();
         System.out.println("一对一： " + insert3);
+        Long insert4 = one2OneInsertMillionDataImpl.insert();
         System.out.println("连接池一对一： " + insert4);
-
     }
 
 }

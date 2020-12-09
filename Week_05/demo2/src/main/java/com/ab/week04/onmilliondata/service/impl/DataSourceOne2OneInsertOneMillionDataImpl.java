@@ -3,6 +3,7 @@ package com.ab.week04.onmilliondata.service.impl;
 import com.ab.week04.onmilliondata.service.IInsertOneMillionData;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -21,6 +22,7 @@ import java.sql.SQLException;
 public class DataSourceOne2OneInsertOneMillionDataImpl implements IInsertOneMillionData {
 
     @Autowired
+    @Qualifier(value = "dataSource01")
     private DataSource dataSource;
 
     @Override
@@ -33,9 +35,10 @@ public class DataSourceOne2OneInsertOneMillionDataImpl implements IInsertOneMill
             for (int i = 0; i < 1000000; i++) {
                 String sql = "insert into t_order(goods_id,user_id,create_date) value("+i%500+","+i%30+",now())";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.executeBatch();
                 preparedStatement.execute();
+                connection.commit();
             }
-            connection.commit();
         } catch (SQLException exception) {
             exception.printStackTrace();
             connection.rollback();

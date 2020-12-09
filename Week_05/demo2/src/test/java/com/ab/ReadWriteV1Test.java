@@ -1,6 +1,9 @@
 package com.ab;
 
+import com.ab.po.OrderPo;
+import com.ab.service.IOrderservice;
 import com.ab.week04.onmilliondata.service.IInsertOneMillionData;
+import org.aspectj.weaver.ast.Or;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,35 +21,27 @@ import java.sql.SQLException;
  */
 @RunWith(value = SpringRunner.class)
 @SpringBootTest(classes = Demo2Application.class)
-public class InsertOneMillionDataTest {
+public class ReadWriteV1Test {
 
     @Autowired
-    @Qualifier(value = "batchInsertOneMillionDataImpl")
-    private IInsertOneMillionData batchInsertOneMillionDataImpl;
-
-    @Autowired
-    @Qualifier(value = "dataSourceBatchInsertOneMillionDataImpl")
-    private IInsertOneMillionData dataSourceBatchInsertOneMillionDataImpl;
-
-    @Autowired
-    @Qualifier(value = "dataSourceOne2OneInsertOneMillionDataImpl")
-    private IInsertOneMillionData dataSourceOne2OneInsertOneMillionDataImpl;
-
-    @Autowired
-    @Qualifier(value = "one2OneInsertMillionDataImpl")
-    private IInsertOneMillionData one2OneInsertMillionDataImpl;
+    private IOrderservice orderservice;
 
     @Test
-    public void test() throws SQLException {
-        Long insert1 = batchInsertOneMillionDataImpl.insert();
-        Long insert2 = dataSourceBatchInsertOneMillionDataImpl.insert();
-        Long insert3 = dataSourceOne2OneInsertOneMillionDataImpl.insert();
-        Long insert4 = one2OneInsertMillionDataImpl.insert();
-        System.out.println("批量： " + insert1);
-        System.out.println("连接池批量： " + insert2);
-        System.out.println("一对一： " + insert3);
-        System.out.println("连接池一对一： " + insert4);
+    public void testRead(){
+//         读 db02
+//        OrderPo orderById = orderservice.getOrderById(12962527L);
+        OrderPo orderById = orderservice.getOrderById(6204937L);
+        System.out.println(orderById);
+    }
 
+    @Test
+    public void testWrite(){
+//        写 db01
+        OrderPo po = new OrderPo();
+        po.setUserId(10001L);
+        po.setGoodsId(102L);
+        Long id = orderservice.insertOrder(po);
+        System.out.println("id :" + id);
     }
 
 }

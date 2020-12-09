@@ -4,12 +4,12 @@ import com.ab.holder.ThreadHolder;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
- * @classname: MulitiDataSourceConfig
+ * @classname: MulitiDataSourceConfig 动态获取数据源
  * @description:
  * @author: sunxinbo
  * @time: 2020/12/8、19:52
  */
-public class MulitiDataSource extends AbstractRoutingDataSource {
+public class MultiDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {

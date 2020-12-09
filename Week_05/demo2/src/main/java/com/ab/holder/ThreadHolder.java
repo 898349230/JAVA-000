@@ -1,4 +1,4 @@
-package com.ab;
+package com.ab.holder;
 
 /**
  * @classname: Holder
@@ -6,10 +6,8 @@ package com.ab;
  * @author: sunxinbo
  * @time: 2020/12/9、22:48
  */
-public class Holder {
+public class ThreadHolder {
 
     public static ThreadLocal<String> threadLocal = new ThreadLocal<>();
-
-
 
 }

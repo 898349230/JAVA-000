@@ -28,8 +28,8 @@ public class One2OneInsertMillionDataImpl implements IInsertOneMillionData {
                 String sql = "insert into t_order(goods_id,user_id,create_date) value("+i1%500+","+i1%30+",now())";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.execute();
+                connection.commit();
             }
-            connection.commit();
         } catch (SQLException exception) {
             exception.printStackTrace();
             connection.rollback();
