@@ -44,12 +44,16 @@ public class MethodInterceptor {
     @Around(value = "getAroundService()")
     public Object getAroundMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         ThreadHolder.threadLocal.set(Constants.READ_DATASOURCE_NAME);
-        return joinPoint.proceed();
+        Object proceed = joinPoint.proceed();
+        ThreadHolder.threadLocal.remove();
+        return proceed;
     }
 
     @Around(value = "insertAroundService()")
     public Object insertAroundMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         ThreadHolder.threadLocal.set(Constants.INSERT_DATASOURCE_NAME);
-        return joinPoint.proceed();
+        Object proceed = joinPoint.proceed();
+        ThreadHolder.threadLocal.remove();
+        return proceed;
     }
 }
