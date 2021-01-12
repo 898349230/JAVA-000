@@ -27,3 +27,7 @@ com.ab.interceptor.MethodInterceptor 配置切面，根据service方法签名判
 com.ab.ReadWriteV1Test 测试类
 
 **3.（必做）**读写分离 - 数据库框架版本 2.0
+
+ss-jdbc 
+
+sharding-jdbc (4.1.1) 实现的读写分离
